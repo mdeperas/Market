@@ -3,7 +3,6 @@ using System.Data.Entity;
 using Market;
 using MarketSimulator.Repository.IRepo;
 using MarketSimulator.Repository.Models;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MarketSimulator.Repository.Repo
 {

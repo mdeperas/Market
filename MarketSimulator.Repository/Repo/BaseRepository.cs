@@ -5,7 +5,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using MarketSimulator.Repository.IRepo;
 using MarketSimulator.Repository.Models;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MarketSimulator.Repository.Repo
 {

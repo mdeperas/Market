@@ -1,13 +1,13 @@
 using System.Data.Entity;
-using System.Web.UI.WebControls.Expressions;
 using Market.Providers;
 using MarketSimulator.Repository.IRepo;
 using MarketSimulator.Repository.Models;
 using MarketSimulator.Repository.Repo;
 using Microsoft.Owin.Security.OAuth;
 using SimpleInjector.Diagnostics;
+using SimpleInjector.Extensions.ExecutionContextScoping;
 
-[assembly: WebActivator.PostApplicationStartMethod(typeof(Market.App_Start.SimpleInjectorWebApiInitializer), "Initialize")]
+//[assembly: WebActivatorEx.PostApplicationStartMethod(typeof(Market.App_Start.SimpleInjectorWebApiInitializer), "Initialize", Order = 1)]
 
 namespace Market.App_Start
 {
@@ -21,9 +21,9 @@ namespace Market.App_Start
         public static void Initialize()
         {
             var container = new Container();
-            container.Options.DefaultScopedLifestyle = new WebApiRequestLifestyle();
-            
-            container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
+	        container.Options.DefaultScopedLifestyle = new ExecutionContextScopeLifestyle();
+
+			container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
 			InitializeContainer(container);
        
             container.Verify();
