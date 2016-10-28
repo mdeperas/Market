@@ -17,7 +17,7 @@ namespace MarketSimulator.Repository.Repo
 		public BaseRepository(IMarketSimulatorContext context)
 		{
 			this.context = context;
-			this.dbSet = context.Set<T>();
+			this.dbSet = (context as DbContext).Set<T>();
 		}
 
 		public virtual T GetById(object id)

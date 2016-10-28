@@ -11,7 +11,7 @@ namespace MarketSimulator.Repository.Models
 	public class MarketSimulatorContext : IdentityDbContext<IdentityUser>, IMarketSimulatorContext
 	{
 		public MarketSimulatorContext()
-			: base("DefaultConnection")
+			: base("AuthContext")
 		{
 			Database.SetInitializer<MarketSimulatorContext>(new MarketSimulatorInitializer());
 		}
@@ -28,7 +28,7 @@ namespace MarketSimulator.Repository.Models
 
 	public class MarketSimulatorInitializer : DropCreateDatabaseAlways<MarketSimulatorContext>
 	{
-		public List<Stock> StocksList { get; set; }
+		public List<Stock> StocksList { get; set; } = new List<Stock>();
 
 		public MarketSimulatorInitializer()
 		{
