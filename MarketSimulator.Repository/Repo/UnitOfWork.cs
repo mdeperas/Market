@@ -6,25 +6,12 @@ using MarketSimulator.Repository.Models;
 
 namespace MarketSimulator.Repository.Repo
 {
-	public class UnitOfWork : IDisposable, IUnitOfWork
+	public class UnitOfWork : IUnitOfWork
 	{
 		private IMarketSimulatorContext dbContext;
 		private AuthRepository authRepository;
 		private BaseRepository<UserWallet> userWalletRepository;
 		private BaseRepository<Stock> stockRepository;
-
-		public bool IsLazyLoadingEnabled
-		{
-			get
-			{
-				return (this.dbContext as DbContext).Configuration.LazyLoadingEnabled;
-			}
-
-			set
-			{
-				(this.dbContext as DbContext).Configuration.LazyLoadingEnabled = value;
-			}
-		}
 
 		private bool disposed = false;
 
@@ -82,25 +69,6 @@ namespace MarketSimulator.Repository.Repo
 			{
 				////TODO: Log errors in the database.
 			}
-		}
-
-		protected virtual void Dispose(bool disposing)
-		{
-			if (!this.disposed)
-			{
-				if (disposing)
-				{
-					this.dbContext.Dispose();
-				}
-
-				this.disposed = true;
-			}
-		}
-
-		public void Dispose()
-		{
-			Dispose(true);
-			GC.SuppressFinalize(this);
 		}
 	}
 }

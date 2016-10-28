@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
 using MarketSimulator.Repository.IRepo;
+using MarketSimulator.Repository.Repo;
 using MarketSimulator.Repository.Models;
 using Microsoft.AspNet.Identity;
 

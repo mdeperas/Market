@@ -13,6 +13,7 @@ namespace Market.App_Start
 	{
 		public static void ConfigurationOAuth(IAppBuilder app)
 		{
+			GlobalConfiguration.Configuration.DependencyResolver.BeginScope();
 			var unitOfWork = GlobalConfiguration.Configuration.DependencyResolver.GetService(typeof(IUnitOfWork)) as IUnitOfWork;
 
 			OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()

@@ -19,8 +19,8 @@ namespace MarketSimulator.Repository.Models
 		[DataType(DataType.Password)]
 		public string ConfirmPassword { get; set; }
 
-		[Required]
-		[Display(Name = "Amount of money")]
-		public string AmountOfMoney { get; set; }
+		//[Required]
+		//[Display(Name = "Amount of money")]
+		//public string AmountOfMoney { get; set; }
 	}
 }

@@ -5,7 +5,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MarketSimulator.Repository.Models
 {
-	public class MarketSimulatorContext : IdentityDbContext<IdentityUser>, IMarketSimulatorContext
+	public class   MarketSimulatorContext : IdentityDbContext<IdentityUser>, IMarketSimulatorContext
 	{
 		public MarketSimulatorContext()
 			: base("AuthContext")
