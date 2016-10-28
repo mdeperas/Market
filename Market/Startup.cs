@@ -17,7 +17,7 @@ namespace Market
 			app.UseWebApi(config);
 
 			SimpleInjectorWebApiInitializer.Initialize(config);
-			OAuthInitializer.ConfigurationOAuth(app);
+			OAuthInitializer.ConfigurationOAuth(app, config);
 		}
 	}
 }

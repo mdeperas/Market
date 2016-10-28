@@ -1,4 +1,6 @@
-﻿using System.Security.Claims;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using MarketSimulator.Repository.IRepo;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -21,7 +23,13 @@ namespace Market.Providers
 
 		public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
 		{
-			context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new [] {"*"});
+			//context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new [] {"*"});
+
+			var header = context.OwinContext.Response.Headers.SingleOrDefault(h => h.Key == "Access-Control-Allow-Origin");
+			if (header.Equals(default(KeyValuePair<string, string[]>)))
+			{
+				context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+			}
 
 			IdentityUser user = await this.unitOfWork.AuthRepository.FindUser(context.UserName, context.Password);
 

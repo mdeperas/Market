@@ -13,7 +13,7 @@ using MarketSimulator.Repository.Models;
 
 namespace Market.Controllers
 {
-	[RoutePrefix("api/Stock")]
+	//[Authorize]
     public class StockController : ApiController
     {
 		private IUnitOfWork unitOfWork;
@@ -123,17 +123,7 @@ namespace Market.Controllers
             return Ok(stock);
         }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        this.unitOfWork.Dispose();
-        //    }
-
-        //    base.Dispose(disposing);
-        //}
-
-        private bool StockExists(string id)
+       private bool StockExists(string id)
         {
 	        return this.unitOfWork.StockRepository.GetById(id) != null;
         }

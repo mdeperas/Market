@@ -39,7 +39,7 @@ namespace Market.App_Start
 			container.Register<IUnitOfWork, UnitOfWork>();
 			container.Register<IMarketSimulatorContext, MarketSimulatorContext>(Lifestyle.Scoped);
 			container.Register(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-	        container.Register<IOAuthAuthorizationServerProvider, SimpleAuthorizationServerProvider>();
+	        //container.Register<IOAuthAuthorizationServerProvider, SimpleAuthorizationServerProvider>();
 
 			container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
 		}

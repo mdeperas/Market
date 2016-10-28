@@ -1,14 +1,22 @@
 ﻿'use strict';
-app.controller('signupController', ['$scope', '$location', '$timeout', 'authService', function ($scope, $location, $timeout, authService) {
+app.controller('signupController', ['$scope', '$location', '$timeout', 'authService', 'stocksService', function ($scope, $location, $timeout, authService, stocksService) {
  
     $scope.savedSuccessfully = false;
     $scope.message = "";
+    $scope.stocks = [];
  
     $scope.registration = {
         userName: "",
         password: "",
-        confirmPassword: ""
+        confirmPassword: "",
+        amountOfMoney: 0,
     };
+
+    stocksService.getStocks().then(function (results) {
+        $scope.stocks = results;
+    }, function (error) {
+        console.log(error.errors);
+    })
  
     $scope.signUp = function () {
  
@@ -17,7 +25,10 @@ app.controller('signupController', ['$scope', '$location', '$timeout', 'authServ
             $scope.savedSuccessfully = true;
             $scope.message = "User has been registered successfully, you will be redicted to login page in 2 seconds.";
             startTimer();
- 
+            
+            stocksService.saveUserStocks($scope.stocks).then(function (response) {
+                console.log(response);
+            });
         },
          function (response) {
              var errors = [];
@@ -35,6 +46,5 @@ app.controller('signupController', ['$scope', '$location', '$timeout', 'authServ
             $timeout.cancel(timer);
             $location.path('/login');
         }, 2000);
-    }
- 
+    } 
 }]);

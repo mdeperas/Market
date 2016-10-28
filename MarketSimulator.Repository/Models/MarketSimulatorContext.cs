@@ -52,12 +52,12 @@ namespace MarketSimulator.Repository.Models
 		{
 			List<Stock> StockList = new List<Stock>
 			{
-				new Stock { Name = "Future Processing", Code = "FP", Unit = "1", Price = "5.1414" },
-				new Stock { Name = "FP Lab", Code = "FPL", Unit = "100", Price = "3.5361" },
-				new Stock { Name = "Progress Bar", Code = "PGB", Unit = "1", Price = "4.3509" },
-				new Stock { Name = "FP Coin", Code = "FPC", Unit = "50", Price = "17.5274" },
-				new Stock { Name = "FP Adventure", Code = "FPA", Unit = "50", Price = "11.4476" },
-				new Stock { Name = "Deadline 24", Code = "DL24", Unit = "100", Price = "5.2782" }
+				new Stock { Name = "Future Processing", Code = "FP", Unit = "1" },
+				new Stock { Name = "FP Lab", Code = "FPL", Unit = "100" },
+				new Stock { Name = "Progress Bar", Code = "PGB", Unit = "1" },
+				new Stock { Name = "FP Coin", Code = "FPC", Unit = "50" },
+				new Stock { Name = "FP Adventure", Code = "FPA", Unit = "50" },
+				new Stock { Name = "Deadline 24", Code = "DL24", Unit = "100" }
 			};
 
 			return StockList;
