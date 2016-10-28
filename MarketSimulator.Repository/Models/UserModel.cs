@@ -21,6 +21,7 @@ namespace MarketSimulator.Repository.Models
 
 		[Required]
 		[Display(Name = "Amount of money")]
-		public string AmountOfMoney { get; set; }
+		[Range(1, int.MaxValue)]
+		public int AmountOfMoney { get; set; }
 	}
 }

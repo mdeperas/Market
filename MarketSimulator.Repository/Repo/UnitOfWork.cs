@@ -1,33 +1,19 @@
 ﻿using System;
-using System.Data.Entity;
 using Market;
 using MarketSimulator.Repository.IRepo;
 using MarketSimulator.Repository.Models;
 
 namespace MarketSimulator.Repository.Repo
 {
-	public class UnitOfWork : IDisposable, IUnitOfWork
+	public class UnitOfWork : IUnitOfWork
 	{
 		private IMarketSimulatorContext dbContext;
 		private AuthRepository authRepository;
 		private BaseRepository<UserWallet> userWalletRepository;
 		private BaseRepository<Stock> stockRepository;
-
-		public bool IsLazyLoadingEnabled
-		{
-			get
-			{
-				return (this.dbContext as DbContext).Configuration.LazyLoadingEnabled;
-			}
-
-			set
-			{
-				(this.dbContext as DbContext).Configuration.LazyLoadingEnabled = value;
-			}
-		}
+		private BaseRepository<UserModel> userModelRepository;
 
 		private bool disposed = false;
-
 		public UnitOfWork(IMarketSimulatorContext dbContext)
 		{
 			this.dbContext = dbContext;
@@ -69,6 +55,19 @@ namespace MarketSimulator.Repository.Repo
 				}
 
 				return this.authRepository;
+			}
+		}
+
+		public BaseRepository<UserModel> UserModelRepository
+		{
+			get
+			{
+				if (this.userModelRepository == null)
+				{
+					this.userModelRepository = new BaseRepository<UserModel>(this.dbContext);
+				}
+
+				return this.userModelRepository;
 			}
 		}
 

@@ -289,6 +289,8 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\StockController.cs" />
+    <Compile Include="Controllers\UserModelController.cs" />
+    <Compile Include="Controllers\UserWalletController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -11,9 +11,10 @@ namespace Market.App_Start
 {
 	public class OAuthInitializer
 	{
-		public static void ConfigurationOAuth(IAppBuilder app)
+		public static void ConfigurationOAuth(IAppBuilder app, HttpConfiguration config)
 		{
-			var unitOfWork = GlobalConfiguration.Configuration.DependencyResolver.GetService(typeof(IUnitOfWork)) as IUnitOfWork;
+			config.DependencyResolver.BeginScope();
+			var unitOfWork = config.DependencyResolver.GetService(typeof(IUnitOfWork)) as IUnitOfWork;
 
 			OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
 			{

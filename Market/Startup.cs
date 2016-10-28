@@ -16,8 +16,8 @@ namespace Market
 			app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
 			app.UseWebApi(config);
 
-			SimpleInjectorWebApiInitializer.Initialize();
-			OAuthInitializer.ConfigurationOAuth(app);
+			SimpleInjectorWebApiInitializer.Initialize(config);
+			OAuthInitializer.ConfigurationOAuth(app, config);
 		}
 	}
 }

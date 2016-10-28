@@ -6,11 +6,11 @@ namespace MarketSimulator.Repository.IRepo
 {
 	public interface IUnitOfWork
 	{
-		bool IsLazyLoadingEnabled { get; set; }
 		AuthRepository AuthRepository { get; }
 		BaseRepository<UserWallet> UserWalletRepository { get; }
 		BaseRepository<Stock> StockRepository { get; }
-		void Dispose();
+		BaseRepository<UserModel> UserModelRepository { get; }
 		void Save();
+		void Dispose();
 	}
 }
