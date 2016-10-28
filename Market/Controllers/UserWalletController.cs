@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
+﻿using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using MarketSimulator.Repository.IRepo;
@@ -124,7 +119,16 @@ namespace Market.Controllers
             return Ok(userWallet);
         }
 
-        private bool UserWalletExists(string id)
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing)
+			{
+				this.unitOfWork.Dispose();
+			}
+			base.Dispose(disposing);
+		}
+
+		private bool UserWalletExists(string id)
         {
 	        return this.unitOfWork.UserWalletRepository.GetById(id) != null;
         }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
+﻿using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using MarketSimulator.Repository.IRepo;
@@ -123,7 +118,16 @@ namespace Market.Controllers
             return Ok(stock);
         }
 
-       private bool StockExists(string id)
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing)
+			{
+				this.unitOfWork.Dispose();
+			}
+			base.Dispose(disposing);
+		}
+
+		private bool StockExists(string id)
         {
 	        return this.unitOfWork.StockRepository.GetById(id) != null;
         }

@@ -9,6 +9,8 @@ namespace MarketSimulator.Repository.IRepo
 		AuthRepository AuthRepository { get; }
 		BaseRepository<UserWallet> UserWalletRepository { get; }
 		BaseRepository<Stock> StockRepository { get; }
+		BaseRepository<UserModel> UserModelRepository { get; }
 		void Save();
+		void Dispose();
 	}
 }

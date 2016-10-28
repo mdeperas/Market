@@ -1,12 +1,6 @@
-using System.Data.Entity;
-using Market.Controllers;
-using Market.Providers;
 using MarketSimulator.Repository.IRepo;
 using MarketSimulator.Repository.Models;
 using MarketSimulator.Repository.Repo;
-using Microsoft.Owin.Security.OAuth;
-using SimpleInjector.Diagnostics;
-using SimpleInjector.Extensions.ExecutionContextScoping;
 
 //[assembly: WebActivator.PostApplicationStartMethod(typeof(Market.App_Start.SimpleInjectorWebApiInitializer), "Initialize")]
 

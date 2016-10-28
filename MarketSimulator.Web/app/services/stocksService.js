@@ -1,5 +1,5 @@
 'use strict';
-app.factory('stocksService', ['$http', function($http) {
+app.factory('stocksService', ['$http', 'authService', function($http, authService) {
     
     var serviceBase = 'http://localhost:51136/';
     var stocksServiceFactory = {};
@@ -15,17 +15,17 @@ app.factory('stocksService', ['$http', function($http) {
 
     var _saveUserStocks = function(stocks) {
 
-        var username = authService.authenication;
+        var username = authService.authentication.username;
 
         $http.post(serviceBase + 'api/stock', stocks).then(function (response) {
             console.log(response);
         })
     };
+
     stocksServiceFactory.getStocks = _getStocks;
     stocksServiceFactory.saveUserStocks = _saveUserStocks;
  
-    return stocksServiceFactory;
- 
+    return stocksServiceFactory; 
 }]);
 
 

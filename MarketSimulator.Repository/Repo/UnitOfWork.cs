@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.Entity;
 using Market;
 using MarketSimulator.Repository.IRepo;
 using MarketSimulator.Repository.Models;
@@ -12,9 +11,9 @@ namespace MarketSimulator.Repository.Repo
 		private AuthRepository authRepository;
 		private BaseRepository<UserWallet> userWalletRepository;
 		private BaseRepository<Stock> stockRepository;
+		private BaseRepository<UserModel> userModelRepository;
 
 		private bool disposed = false;
-
 		public UnitOfWork(IMarketSimulatorContext dbContext)
 		{
 			this.dbContext = dbContext;
@@ -59,6 +58,19 @@ namespace MarketSimulator.Repository.Repo
 			}
 		}
 
+		public BaseRepository<UserModel> UserModelRepository
+		{
+			get
+			{
+				if (this.userModelRepository == null)
+				{
+					this.userModelRepository = new BaseRepository<UserModel>(this.dbContext);
+				}
+
+				return this.userModelRepository;
+			}
+		}
+
 		public void Save()
 		{
 			try
@@ -69,6 +81,25 @@ namespace MarketSimulator.Repository.Repo
 			{
 				////TODO: Log errors in the database.
 			}
+		}
+
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				if (disposing)
+				{
+					this.dbContext.Dispose();
+				}
+
+				this.disposed = true;
+			}
+		}
+
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
 		}
 	}
 }
