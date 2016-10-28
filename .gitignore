@@ -1,0 +1,6 @@
+Market/bin/
+Market/obj/
+MarketSimulator.Web/bin/
+MarketSimulator.Repository/bin/
+MarketSimulator.Repository/obj/
+MarketSimulator.Web/obj/

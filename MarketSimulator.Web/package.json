@@ -1,0 +1,21 @@
+{
+  "name": "marketsimulator.web",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "bower": "^1.7.9",
+    "gulp": "^3.9.1",
+    "gulp-connect": "^5.0.0",
+    "gulp-usemin": "^0.3.24",
+    "wiredep": "^4.0.0"
+  },
+  "dependencies": {
+    "angular": "^1.5.8"
+  }
+}
