@@ -11,7 +11,9 @@ app.controller('signupController', ['$scope', '$location', '$timeout', 'authServ
         confirmPassword: "",
     };
 
-    $scope.userdata = {};
+    $scope.userData = {
+        amountOfMoney: 0
+    };
 
     stocksService.getStocks().then(function (results) {
         $scope.stocks = results;
@@ -23,20 +25,13 @@ app.controller('signupController', ['$scope', '$location', '$timeout', 'authServ
  
         authService.saveRegistration($scope.registration).then(function (response) {
  
-            $scope.stocks;
+            var userId = response.data.id;
+
             $scope.savedSuccessfully = true;
-            $scope.message = "User has been registered successfully, you will be redicted to login page in 2 seconds.";
+            $scope.message = "User has been registered successfully, you will be redire  cted to login page in 2 seconds.";
             startTimer();
-            
-            /* */
-            
-            /*stocksService.saveUserStocks($scope.stocks).then(function (response) {
-                console.log(response);
-            });*/
 
-
-        },
-         function (response) {
+        }, function (response) {
              var errors = [];
              for (var key in response.data.modelState) {
                  for (var i = 0; i < response.data.modelState[key].length; i++) {
@@ -44,8 +39,16 @@ app.controller('signupController', ['$scope', '$location', '$timeout', 'authServ
                  }
              }
              $scope.message = "Failed to register user due to:" + errors.join(' ');
-         });
-    };
+        });
+     
+            userDataService.saveUserData($scope.userData).then(function (response) {
+                console.log(respone);
+            });
+        
+            userWalletService.saveUserWallet($scope.stocks, userId).then(function (response) {
+                console.log(response);
+            })}  ;
+          
  
     var startTimer = function () {
         var timer = $timeout(function () {

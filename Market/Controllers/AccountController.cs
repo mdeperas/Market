@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using MarketSimulator.Repository.IRepo;
 using MarketSimulator.Repository.ViewModels;
@@ -20,24 +22,23 @@ namespace Market.Controllers
 		// POST api/Account/Register
 		[AllowAnonymous]
 		[Route("Register")]
-		public async Task<IHttpActionResult> Register(UserModel userModel)
+		public async Task<HttpResponseMessage> Register(UserModel userModel)
 		{
 			if (!ModelState.IsValid)
 			{
-				return BadRequest(ModelState);
+				return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
 			}
 
 			IdentityResult result = await this.unitOfWork.AuthRepository.RegisterUser(userModel);
 
-			IHttpActionResult errorResult = GetErrorResult(result);
+			HttpResponseMessage errorResult = GetErrorResult(result);
 
 			if (errorResult != null)
 			{
 				return errorResult;
 			}
 
-			//return Request.CreateResponse(HttpStatusCode.OK, new { Id = userModel.Id });
-			return Ok(userModel);
+			return Request.CreateResponse(HttpStatusCode.OK, new { Id = userModel.Id });
 		}
 
 		protected override void Dispose(bool disposing)
@@ -50,11 +51,11 @@ namespace Market.Controllers
 			base.Dispose(disposing);
 		}
 
-		private IHttpActionResult GetErrorResult(IdentityResult result)
+		private HttpResponseMessage GetErrorResult(IdentityResult result)
 		{
 			if (result == null)
 			{
-				return InternalServerError();
+				return Request.CreateResponse(HttpStatusCode.InternalServerError);
 			}
 
 			if (!result.Succeeded)
@@ -69,11 +70,10 @@ namespace Market.Controllers
 
 				if (ModelState.IsValid)
 				{
-					// No ModelState errors are available to send, so just return an empty BadRequest.
-					return BadRequest();
+					Request.CreateResponse(HttpStatusCode.BadRequest);
 				}
 
-				return BadRequest(ModelState);
+				return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
 			}
 
 			return null;
