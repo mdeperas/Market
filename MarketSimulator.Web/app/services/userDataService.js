@@ -11,7 +11,7 @@ app.factory('userDataService', ['$http', function($http) {
         })
     };
 
-    userWalletServiceFactory.saveUserData = _saveUserData;
+    userDataServiceFactory.saveUserData = _saveUserData;
  
     return userDataServiceFactory; 
 }]);

@@ -8,7 +8,8 @@ using MarketSimulator.Repository.Models;
 
 namespace Market.Controllers
 {
-    public class StockController : ApiController
+	[RoutePrefix("api/Stock")]
+	public class StockController : ApiController
     {
 		private IUnitOfWork unitOfWork;
 

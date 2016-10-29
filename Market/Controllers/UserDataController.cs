@@ -8,7 +8,7 @@ using MarketSimulator.Repository.Models;
 
 namespace Market.Controllers
 {
-	[Authorize]
+	[RoutePrefix("api/UserData")]
 	public class UserDataController : ApiController
     {
 		private IUnitOfWork unitOfWork;

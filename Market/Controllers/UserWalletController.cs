@@ -8,7 +8,7 @@ using MarketSimulator.Repository.Models;
 
 namespace Market.Controllers
 {
-	[Authorize]
+	[RoutePrefix("api/UserWallet")]
 	public class UserWalletController : ApiController
     {
 		private IUnitOfWork unitOfWork;
@@ -17,6 +17,7 @@ namespace Market.Controllers
 	    {
 		    this.unitOfWork = unitOfWork;
 	    }
+
 
 		// GET: api/UserWallet
 		public IQueryable<UserWallet> GetUserWallets()
@@ -74,32 +75,21 @@ namespace Market.Controllers
 
         // POST: api/UserWallet
         [ResponseType(typeof(UserWallet))]
-        public IHttpActionResult PostUserWallet(UserWallet userWallet)
+        public IHttpActionResult PostUserWallet([FromBody] UserWallet[] userWallets)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-			this.unitOfWork.UserWalletRepository.Insert(userWallet);
+	        foreach (var userWallet in userWallets)
+	        {
+				this.unitOfWork.UserWalletRepository.Insert(userWallet);
+			}
+			
+			this.unitOfWork.Save();
 
-            try
-            {
-				this.unitOfWork.Save();
-            }
-            catch (DbUpdateException)
-            {
-                if (UserWalletExists(userWallet.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtRoute("DefaultApi", new { id = userWallet.Id }, userWallet);
+	        return Ok();
         }
 
         // DELETE: api/UserWallet/5
