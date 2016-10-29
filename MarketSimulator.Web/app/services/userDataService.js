@@ -6,9 +6,7 @@ app.factory('userDataService', ['$http', function($http) {
  
     var _saveUserData = function(userData) {
            
-        return $http.post(serviceBase + 'api/userData', userData).then(function (response) {
-            return data;
-        })
+        return $http.post(serviceBase + 'api/userData', userData);
     };
 
     userDataServiceFactory.saveUserData = _saveUserData;

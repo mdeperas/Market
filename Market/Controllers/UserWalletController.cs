@@ -20,9 +20,9 @@ namespace Market.Controllers
 
 
 		// GET: api/UserWallet
-		public IQueryable<UserWallet> GetUserWallets()
+		public IQueryable<UserWallet> GetUserWallets(string userId)
 		{
-			return this.unitOfWork.UserWalletRepository.Get().AsQueryable();
+			return this.unitOfWork.UserWalletRepository.Get().Where(x => x.UserData.Id == userId).AsQueryable();
 		}
 
         // GET: api/UserWallet/5

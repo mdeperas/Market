@@ -1,7 +1,7 @@
 'use strict';
-app.controller('stocksController', ['$scope', function ($scope) {
+app.controller('stocksController', ['$scope', 'authService', 'userWalletService', function ($scope, authService, userWalletService) {
 
-    $scope.stocks = {};
+    $scope.liveStocks = {};
 
     var socket = new WebSocket('ws://webtask.future-processing.com:8068/ws/stocks');
 
@@ -15,11 +15,19 @@ app.controller('stocksController', ['$scope', function ($scope) {
         socket.onmessage = function(event) {
             var data = JSON.parse(event.data);
             
-            data.Items.forEach(function(stocks)  {
-                console.log(stocks);
-                $scope.stocks[stocks.Code] = stocks;
+            data.Items.forEach(function(liveStocks)  {
+                console.log(liveStocks);
+                $scope.liveStocks[liveStocks.Code] = liveStocks;
             });
 
             $scope.$apply();            
         }
+
+        var getUserStocks = function () {
+            var test = userWalletService.getUserWallet(authService.authentication.userId);
+            console.log(test);
+            //$scope.userStocks 
+        };
+
+        getUserStocks();
 }]);

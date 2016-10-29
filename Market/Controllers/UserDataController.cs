@@ -19,6 +19,7 @@ namespace Market.Controllers
 		}
 
 		// GET: api/UserData
+		[Authorize]
 		public IQueryable<UserData> GetUsersData()
 		{
 			return this.unitOfWork.UserDataRepository.Get().AsQueryable();

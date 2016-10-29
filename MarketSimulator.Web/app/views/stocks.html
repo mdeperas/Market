@@ -1,8 +1,35 @@
 <div class="row">
-    <div class="col-md-2">
-        &nbsp;
-    </div>
-    <div class="col-md-8">
+        <div class="col-md-6">
+                <h2 class="form-login-heading">Actual stock prices:</h2>
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Code</th>
+                            <th>Unit</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-ng-repeat="stock in liveStocks">
+                            <td>
+                                {{ stock.Name }}
+                            </td>
+                            <td>
+                                {{ stock.Code }}
+                            </td>
+                            <td>
+                                {{ stock.Unit }}
+                            </td>
+                            <td>
+                                {{ stock.Price }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+    <div class="col-md-6">
+        <h2 class="form-login-heading">Your stock wallet:</h2>
         <table class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
