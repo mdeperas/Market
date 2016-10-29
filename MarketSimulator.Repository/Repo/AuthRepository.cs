@@ -2,11 +2,11 @@
 using System.Data.Entity;
 using System.Threading.Tasks;
 using MarketSimulator.Repository.IRepo;
-using MarketSimulator.Repository.Models;
+using MarketSimulator.Repository.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace Market
+namespace MarketSimulator.Repository.Repo
 {
     public class AuthRepository : IDisposable
 	{

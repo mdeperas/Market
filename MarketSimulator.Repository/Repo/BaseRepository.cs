@@ -4,11 +4,10 @@ using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using MarketSimulator.Repository.IRepo;
-using MarketSimulator.Repository.Models;
 
 namespace MarketSimulator.Repository.Repo
 {
-	public class BaseRepository<T> : IBaseRepository<T> where T : EntityModelBase
+	public class BaseRepository<T> : IBaseRepository<T> where T : class 
 	{
 		private readonly IMarketSimulatorContext context;
 		private readonly DbSet<T> dbSet;
@@ -24,37 +23,9 @@ namespace MarketSimulator.Repository.Repo
 			return this.dbSet.Find(id);
 		}
 
-		public virtual int GetItemsCount()
+		public virtual IEnumerable<T> Get()
 		{
-			return this.dbSet.Count();
-		}
-
-		public virtual IEnumerable<T> Get(
-			Expression<Func<T, bool>> filter = null,
-			Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
-			string includeProperties = "",
-			int pageNumber = 1,
-			int itemsPerPage = 2147483647)
-		{
-
-			if(dbSet == null)
-			{
-				return null;
-			}
-
-			IQueryable<T> query = dbSet;
-
-			if (filter != null)
-			{
-				query = query.Where(filter);
-			}
-
-			foreach (var includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-			{
-				query = query.Include(includeProperty);
-			}
-
-			return (orderBy != null ? orderBy(query.ToList().AsQueryable()) : query.OrderBy(q => q.Id)).Skip((pageNumber - 1) * itemsPerPage).Take(itemsPerPage);
+			return this.dbSet.ToList();
 		}
 
 		public virtual void Insert(T entity)

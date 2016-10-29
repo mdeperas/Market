@@ -17,7 +17,7 @@ app.factory('stocksService', ['$http', 'authService', function($http, authServic
 
         var username = authService.authentication.username;
 
-        $http.post(serviceBase + 'api/stock', stocks).then(function (response) {
+        $http.post(serviceBase + 'api/stocks', stocks).then(function (response) {
             console.log(response);
         })
     };

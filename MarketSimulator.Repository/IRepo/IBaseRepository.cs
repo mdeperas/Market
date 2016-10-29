@@ -9,12 +9,7 @@ namespace MarketSimulator.Repository.IRepo
 	{
 		void Delete(object id);
 		void Delete(T entity);
-		IEnumerable<T> Get(
-			Expression<Func<T, bool>> filter = null,
-			Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
-			string includeProperties = "",
-			int pageNumber = 1,
-			int itemsPerPage = 2147483647);
+		IEnumerable<T> Get();
 		T GetById(object id);
 		void Insert(T entity);
 		void Update(T entity);

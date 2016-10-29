@@ -1,5 +1,4 @@
-﻿using Market;
-using MarketSimulator.Repository.Models;
+﻿using MarketSimulator.Repository.Models;
 using MarketSimulator.Repository.Repo;
 
 namespace MarketSimulator.Repository.IRepo
@@ -9,7 +8,7 @@ namespace MarketSimulator.Repository.IRepo
 		AuthRepository AuthRepository { get; }
 		BaseRepository<UserWallet> UserWalletRepository { get; }
 		BaseRepository<Stock> StockRepository { get; }
-		BaseRepository<UserModel> UserModelRepository { get; }
+		BaseRepository<UserData> UserDataRepository { get; }
 		void Save();
 		void Dispose();
 	}

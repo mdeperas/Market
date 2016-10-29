@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MarketSimulator.Repository.Models
+namespace MarketSimulator.Repository.ViewModels
 {
-	public class UserModel : EntityModelBase
+	public class UserModel
 	{
 		[Required]
 		[Display(Name = "User name")]
@@ -18,10 +18,5 @@ namespace MarketSimulator.Repository.Models
 		[Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
 		[DataType(DataType.Password)]
 		public string ConfirmPassword { get; set; }
-
-		[Required]
-		[Display(Name = "Amount of money")]
-		[Range(1, int.MaxValue)]
-		public int AmountOfMoney { get; set; }
 	}
 }

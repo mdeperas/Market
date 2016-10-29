@@ -19,7 +19,7 @@ namespace MarketSimulator.Repository.Models
 		}
 
 		public IDbSet<Stock> Stocks { get; set; }
-		public IDbSet<UserModel> UserModels { get; set; }
+		public IDbSet<UserData> UserData { get; set; }
 		public IDbSet<UserWallet> UserWallets { get; set; }
 	}
 

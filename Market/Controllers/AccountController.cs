@@ -1,9 +1,7 @@
-﻿using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
 using MarketSimulator.Repository.IRepo;
-using MarketSimulator.Repository.Models;
+using MarketSimulator.Repository.ViewModels;
 using Microsoft.AspNet.Identity;
 
 namespace Market.Controllers
@@ -22,23 +20,24 @@ namespace Market.Controllers
 		// POST api/Account/Register
 		[AllowAnonymous]
 		[Route("Register")]
-		public async Task<HttpResponseMessage> Register(UserModel userModel)
+		public async Task<IHttpActionResult> Register(UserModel userModel)
 		{
-			//if (!ModelState.IsValid)
-			//{
-			//	return BadRequest(ModelState);
-			//}
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
 
 			IdentityResult result = await this.unitOfWork.AuthRepository.RegisterUser(userModel);
 
 			IHttpActionResult errorResult = GetErrorResult(result);
 
-			//if (errorResult != null)
-			//{
-			//	return errorResult;
-			//}
+			if (errorResult != null)
+			{
+				return errorResult;
+			}
 
-			return Request.CreateResponse(HttpStatusCode.OK, new { Id = userModel.Id });
+			//return Request.CreateResponse(HttpStatusCode.OK, new { Id = userModel.Id });
+			return Ok(userModel);
 		}
 
 		protected override void Dispose(bool disposing)

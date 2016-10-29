@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
+﻿using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using MarketSimulator.Repository.IRepo;
@@ -13,49 +8,50 @@ using MarketSimulator.Repository.Models;
 
 namespace Market.Controllers
 {
-    public class UserModelController : ApiController
+	[Authorize]
+	public class UserDataController : ApiController
     {
 		private IUnitOfWork unitOfWork;
 
-		public UserModelController(IUnitOfWork unitOfWork)
+		public UserDataController(IUnitOfWork unitOfWork)
 		{
 			this.unitOfWork = unitOfWork;
 		}
 
-		// GET: api/UserModel
-		public IQueryable<UserModel> GetUserModels()
+		// GET: api/UserData
+		public IQueryable<UserData> GetUsersData()
 		{
-			return this.unitOfWork.UserModelRepository.Get().AsQueryable();
+			return this.unitOfWork.UserDataRepository.Get().AsQueryable();
 		}
 
-        // GET: api/UserModel/5
-        [ResponseType(typeof(UserModel))]
-        public IHttpActionResult GetUserModel(string id)
+        // GET: api/UserData/5
+        [ResponseType(typeof(UserData))]
+        public IHttpActionResult GetUserData(string id)
         {
-	        UserModel userModel = this.unitOfWork.UserModelRepository.GetById(id);
-            if (userModel == null)
+	        UserData UserData = this.unitOfWork.UserDataRepository.GetById(id);
+            if (UserData == null)
             {
                 return NotFound();
             }
 
-            return Ok(userModel);
+            return Ok(UserData);
         }
 
-        // PUT: api/UserModel/5
+        // PUT: api/UserData/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutUserModel(string id, UserModel userModel)
+        public IHttpActionResult PutUserData(string id, UserData UserData)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != userModel.Id)
+            if (id != UserData.Id)
             {
                 return BadRequest();
             }
 
-			this.unitOfWork.UserModelRepository.Update(userModel);
+			this.unitOfWork.UserDataRepository.Update(UserData);
 
 			try
             {
@@ -64,7 +60,7 @@ namespace Market.Controllers
 			}
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserModelExists(id))
+                if (!UserDataExists(id))
                 {
                     return NotFound();
                 }
@@ -77,16 +73,16 @@ namespace Market.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/UserModel
-        [ResponseType(typeof(UserModel))]
-        public IHttpActionResult PostUserModel(UserModel userModel)
+        // POST: api/UserData
+        [ResponseType(typeof(UserData))]
+        public IHttpActionResult PostUserData(UserData UserData)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-			this.unitOfWork.UserModelRepository.Insert(userModel);
+			this.unitOfWork.UserDataRepository.Insert(UserData);
 
             try
             {
@@ -94,7 +90,7 @@ namespace Market.Controllers
             }
             catch (DbUpdateException)
             {
-                if (UserModelExists(userModel.Id))
+                if (UserDataExists(UserData.Id))
                 {
                     return Conflict();
                 }
@@ -104,25 +100,25 @@ namespace Market.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = userModel.Id }, userModel);
+            return CreatedAtRoute("DefaultApi", new { id = UserData.Id }, UserData);
         }
 
-        // DELETE: api/UserModel/5
-        [ResponseType(typeof(UserModel))]
-        public IHttpActionResult DeleteUserModel(string id)
+        // DELETE: api/UserData/5
+        [ResponseType(typeof(UserData))]
+        public IHttpActionResult DeleteUserData(string id)
         {
-	        UserModel userModel = this.unitOfWork.UserModelRepository.GetById(id);
-            if (userModel == null)
+	        UserData UserData = this.unitOfWork.UserDataRepository.GetById(id);
+            if (UserData == null)
             {
                 return NotFound();
             }
 
-			this.unitOfWork.UserModelRepository.Delete(id);
+			this.unitOfWork.UserDataRepository.Delete(id);
 	        ;
 
 			this.unitOfWork.Save();
 
-			return Ok(userModel);
+			return Ok(UserData);
         }
 
         protected override void Dispose(bool disposing)
@@ -134,9 +130,9 @@ namespace Market.Controllers
             base.Dispose(disposing);
         }
 
-        private bool UserModelExists(string id)
+        private bool UserDataExists(string id)
         {
-	        return this.unitOfWork.UserModelRepository.GetById(id) != null;
+	        return this.unitOfWork.UserDataRepository.GetById(id) != null;
         }
     }
 }

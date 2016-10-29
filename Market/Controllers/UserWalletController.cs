@@ -9,7 +9,6 @@ using MarketSimulator.Repository.Models;
 namespace Market.Controllers
 {
 	[Authorize]
-	[RoutePrefix("api/UserWallet")]
 	public class UserWalletController : ApiController
     {
 		private IUnitOfWork unitOfWork;

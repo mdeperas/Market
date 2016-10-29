@@ -1,5 +1,4 @@
 ﻿using System;
-using Market;
 using MarketSimulator.Repository.IRepo;
 using MarketSimulator.Repository.Models;
 
@@ -11,7 +10,7 @@ namespace MarketSimulator.Repository.Repo
 		private AuthRepository authRepository;
 		private BaseRepository<UserWallet> userWalletRepository;
 		private BaseRepository<Stock> stockRepository;
-		private BaseRepository<UserModel> userModelRepository;
+		private BaseRepository<UserData> userDataRepository;
 
 		private bool disposed = false;
 		public UnitOfWork(IMarketSimulatorContext dbContext)
@@ -58,16 +57,16 @@ namespace MarketSimulator.Repository.Repo
 			}
 		}
 
-		public BaseRepository<UserModel> UserModelRepository
+		public BaseRepository<UserData> UserDataRepository
 		{
 			get
 			{
-				if (this.userModelRepository == null)
+				if (this.userDataRepository == null)
 				{
-					this.userModelRepository = new BaseRepository<UserModel>(this.dbContext);
+					this.userDataRepository = new BaseRepository<UserData>(this.dbContext);
 				}
 
-				return this.userModelRepository;
+				return this.userDataRepository;
 			}
 		}
 

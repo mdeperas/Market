@@ -8,7 +8,7 @@ namespace MarketSimulator.Repository.IRepo
 	public interface IMarketSimulatorContext : IDisposable
 	{
 		IDbSet<Stock> Stocks { get; set; }
-		IDbSet<UserModel> UserModels { get; set; }
+		IDbSet<UserData> UserData { get; set; }
 		IDbSet<UserWallet> UserWallets { get; set; }
 
 		int SaveChanges();

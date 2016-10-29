@@ -8,7 +8,6 @@ using MarketSimulator.Repository.Models;
 
 namespace Market.Controllers
 {
-	//[Authorize]
     public class StockController : ApiController
     {
 		private IUnitOfWork unitOfWork;
@@ -18,6 +17,7 @@ namespace Market.Controllers
 			this.unitOfWork = unitOfWork;
 		}
 
+		[AllowAnonymous]
 		// GET: api/Stock
 		public IQueryable<Stock> GetStocks()
 		{

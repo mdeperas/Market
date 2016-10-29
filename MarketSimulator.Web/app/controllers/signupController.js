@@ -9,8 +9,9 @@ app.controller('signupController', ['$scope', '$location', '$timeout', 'authServ
         userName: "",
         password: "",
         confirmPassword: "",
-        amountOfMoney: 0,
     };
+
+    $scope.userdata = {};
 
     stocksService.getStocks().then(function (results) {
         $scope.stocks = results;
@@ -27,9 +28,13 @@ app.controller('signupController', ['$scope', '$location', '$timeout', 'authServ
             $scope.message = "User has been registered successfully, you will be redicted to login page in 2 seconds.";
             startTimer();
             
+            /* */
+            
             /*stocksService.saveUserStocks($scope.stocks).then(function (response) {
                 console.log(response);
             });*/
+
+
         },
          function (response) {
              var errors = [];
