@@ -24,7 +24,7 @@ app.controller('stocksController', ['$scope', 'authService', 'userWalletService'
         }
 
         var getUserStocks = function () {
-            var test = userWalletService.getUserWallet(authService.authentication.userId);
+            var test = userWalletService.getUserWallet();
             console.log(test);
             //$scope.userStocks 
         };

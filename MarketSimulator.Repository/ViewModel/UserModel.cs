@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using MarketSimulator.Repository.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MarketSimulator.Repository.ViewModel
 {
 	public class UserModel
 	{
-		public string Id { get; set; }
-
 		[Required]
 		[Display(Name = "User name")]
 		public string UserName { get; set; }
@@ -21,5 +20,8 @@ namespace MarketSimulator.Repository.ViewModel
 		[Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
 		[DataType(DataType.Password)]
 		public string ConfirmPassword { get; set; }
+
+		public UserWallet[] UserWallets { get; set; }
+		public UserData UserData { get; set; }
 	}
 }

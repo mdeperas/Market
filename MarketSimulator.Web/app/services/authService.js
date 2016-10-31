@@ -7,7 +7,6 @@ app.factory('authService', ['$http', '$q', 'localStorageService', function ($htt
     var _authentication = {
         isAuth: false,
         userName : "",
-        userId: ""
     };
  
     var _saveRegistration = function (registration) {
@@ -15,8 +14,6 @@ app.factory('authService', ['$http', '$q', 'localStorageService', function ($htt
         _logOut();
  
         return $http.post(serviceBase + 'api/account/register', registration).then(function (response) {
-
-            _authentication.userId = response.data.id;
             return response;
         });
  

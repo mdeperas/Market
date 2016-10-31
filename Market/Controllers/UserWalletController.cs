@@ -1,10 +1,12 @@
 ﻿using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using MarketSimulator.Repository.IRepo;
 using MarketSimulator.Repository.Models;
+using Market.Extensions;
 
 namespace Market.Controllers
 {
@@ -17,19 +19,20 @@ namespace Market.Controllers
 		    this.unitOfWork = unitOfWork;
 	    }
 
-
+		[Authorize]
 		// GET: api/UserWallet
 		public IQueryable<UserWallet> GetUserWallets()
 		{
-			return this.unitOfWork.UserWalletRepository.Get().AsQueryable();
+			var userId = HttpContext.Current.User.GetUserId();
+
+			return this.unitOfWork.UserWalletRepository.Get().Where(x => x.UserId == userId).AsQueryable();
 		}
 
 		// GET: api/UserWallet/5
-		public IQueryable<UserWallet> GetUserWalletsByUserId(string userId)
+		[ResponseType(typeof(UserWallet))]
+		public UserWallet GetUserWallet(string id)
 		{
-			var userWallets = this.unitOfWork.UserWalletRepository.Get().Where(x => x.UserModelId == userId).AsQueryable();
-
-			return userWallets;
+			return this.unitOfWork.UserWalletRepository.GetById(id);
 		}
 
 		// PUT: api/UserWallet/5
@@ -66,6 +69,7 @@ namespace Market.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
+
 
         // POST: api/UserWallet
         [ResponseType(typeof(UserWallet))]

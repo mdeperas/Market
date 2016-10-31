@@ -23,7 +23,7 @@ namespace MarketSimulator.Repository.Models
 		public IDbSet<UserWallet> UserWallets { get; set; }
 	}
 
-	public class MarketSimulatorInitializer : DropCreateDatabaseAlways<MarketSimulatorContext>
+	public class MarketSimulatorInitializer : DropCreateDatabaseIfModelChanges<MarketSimulatorContext>
 	{
 		public List<Stock> StocksList { get; set; } = new List<Stock>();
 

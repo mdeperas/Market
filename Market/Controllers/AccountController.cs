@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Data.Entity.Infrastructure;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -41,6 +42,18 @@ namespace Market.Controllers
 			}
 
 			IdentityUser user = await this.unitOfWork.AuthRepository.FindUser(userModel.UserName, userModel.Password);
+
+			foreach (var userWallet in userModel.UserWallets)
+			{
+				userWallet.UserId = user.Id;
+
+				this.unitOfWork.UserWalletRepository.Insert(userWallet);
+			}
+
+			userModel.UserData.UserId = user.Id;
+			this.unitOfWork.UserDataRepository.Insert(userModel.UserData);
+
+			this.unitOfWork.Save();
 
 			return Request.CreateResponse(HttpStatusCode.OK, user.Id);
 		}

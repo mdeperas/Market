@@ -291,6 +291,7 @@
     <Compile Include="Controllers\StockController.cs" />
     <Compile Include="Controllers\UserDataController.cs" />
     <Compile Include="Controllers\UserWalletController.cs" />
+    <Compile Include="Extensions\PrincipalExtension.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

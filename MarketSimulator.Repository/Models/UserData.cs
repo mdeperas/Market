@@ -8,15 +8,15 @@ namespace MarketSimulator.Repository.Models
 {
 	public class UserData : EntityModelBase
 	{
-		public string UserModelId { get; set; }
+		public string UserId { get; set; }
 
 		[Required]
 		[Display(Name = "Amount of money")]
 		[Range(1, int.MaxValue)]
 		public int AmountOfMoney { get; set; }
 
-		[ForeignKey("UserId")]
 		[JsonIgnore]
-		public virtual UserModel UserModel { get; set; }
+		[ForeignKey("UserId")]
+		public virtual IdentityUser User { get; set; }
 	}
 }

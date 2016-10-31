@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using MarketSimulator.Repository.ViewModel;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Newtonsoft.Json;
 
 namespace MarketSimulator.Repository.Models
@@ -13,8 +14,8 @@ namespace MarketSimulator.Repository.Models
 		public string Amount { get; set; }
 
 		[JsonIgnore]
-		[ForeignKey("UserModelId")]
-		public virtual UserModel UserId { get; set; }
+		[ForeignKey("UserId")]
+		public virtual IdentityUser User { get; set; }
 
 		[JsonIgnore]
 		[ForeignKey("StockId")]

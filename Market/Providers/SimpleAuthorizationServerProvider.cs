@@ -40,6 +40,8 @@ namespace Market.Providers
 			}
 
 			var identity = new ClaimsIdentity(context.Options.AuthenticationType);
+			identity.AddClaim(new Claim(ClaimTypes.Name, user.UserName));
+			identity.AddClaim(new Claim("UserId", user.Id));
 			identity.AddClaim(new Claim("sub", context.UserName));
 			identity.AddClaim(new Claim("role", "user"));
 

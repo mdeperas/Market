@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using MarketSimulator.Repository.IRepo;
 using MarketSimulator.Repository.Models;
 
@@ -75,10 +76,11 @@ namespace MarketSimulator.Repository.Repo
 			try
 			{
 				this.dbContext.SaveChanges();
+				Debug.WriteLine("Saving changes");
 			}
 			catch (Exception e)
 			{
-				////TODO: Log errors in the database.
+				Debug.WriteLine(e.Message);
 			}
 		}
 
