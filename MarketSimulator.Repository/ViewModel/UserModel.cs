@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace MarketSimulator.Repository.ViewModels
+namespace MarketSimulator.Repository.ViewModel
 {
-	public class UserModel : IdentityUser
+	public class UserModel
 	{
+		public string Id { get; set; }
+
 		[Required]
 		[Display(Name = "User name")]
 		public string UserName { get; set; }

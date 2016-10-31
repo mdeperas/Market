@@ -3,8 +3,10 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using MarketSimulator.Repository.IRepo;
-using MarketSimulator.Repository.ViewModels;
+using MarketSimulator.Repository.Models;
+using MarketSimulator.Repository.ViewModel;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Market.Controllers
 {
@@ -38,7 +40,9 @@ namespace Market.Controllers
 				return errorResult;
 			}
 
-			return Request.CreateResponse(HttpStatusCode.OK, new { Id = userModel.Id });
+			IdentityUser user = await this.unitOfWork.AuthRepository.FindUser(userModel.UserName, userModel.Password);
+
+			return Request.CreateResponse(HttpStatusCode.OK, user.Id);
 		}
 
 		protected override void Dispose(bool disposing)

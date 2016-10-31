@@ -8,7 +8,6 @@ using MarketSimulator.Repository.Models;
 
 namespace Market.Controllers
 {
-	[RoutePrefix("api/UserWallet")]
 	public class UserWalletController : ApiController
     {
 		private IUnitOfWork unitOfWork;
@@ -20,26 +19,21 @@ namespace Market.Controllers
 
 
 		// GET: api/UserWallet
-		public IQueryable<UserWallet> GetUserWallets(string userId)
+		public IQueryable<UserWallet> GetUserWallets()
 		{
-			return this.unitOfWork.UserWalletRepository.Get().Where(x => x.UserData.Id == userId).AsQueryable();
+			return this.unitOfWork.UserWalletRepository.Get().AsQueryable();
 		}
 
-        // GET: api/UserWallet/5
-        [ResponseType(typeof(UserWallet))]
-        public IHttpActionResult GetUserWallet(string id)
-        {
-	        UserWallet userWallet = this.unitOfWork.UserWalletRepository.GetById(id);
-            if (userWallet == null)
-            {
-                return NotFound();
-            }
+		// GET: api/UserWallet/5
+		public IQueryable<UserWallet> GetUserWalletsByUserId(string userId)
+		{
+			var userWallets = this.unitOfWork.UserWalletRepository.Get().Where(x => x.UserModelId == userId).AsQueryable();
 
-            return Ok(userWallet);
-        }
+			return userWallets;
+		}
 
-        // PUT: api/UserWallet/5
-        [ResponseType(typeof(void))]
+		// PUT: api/UserWallet/5
+		[ResponseType(typeof(void))]
         public IHttpActionResult PutUserWallet(string id, UserWallet userWallet)
         {
             if (!ModelState.IsValid)

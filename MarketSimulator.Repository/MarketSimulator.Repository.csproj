@@ -73,7 +73,7 @@
     <Compile Include="Repo\AuthRepository.cs" />
     <Compile Include="Repo\BaseRepository.cs" />
     <Compile Include="Repo\UnitOfWork.cs" />
-    <Compile Include="ViewModels\UserModel.cs" />
+    <Compile Include="ViewModel\UserModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

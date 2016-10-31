@@ -23,7 +23,6 @@ namespace Market.App_Start
 
 			container.Verify();
 
-//			GlobalConfiguration.Configuration.DependencyResolver =
 			config.DependencyResolver = 
                 new SimpleInjectorWebApiDependencyResolver(container);
         }
@@ -33,7 +32,6 @@ namespace Market.App_Start
 			container.Register<IUnitOfWork, UnitOfWork>();
 			container.Register<IMarketSimulatorContext, MarketSimulatorContext>(Lifestyle.Scoped);
 			container.Register(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-	        //container.Register<IOAuthAuthorizationServerProvider, SimpleAuthorizationServerProvider>();
 
 			container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
 		}

@@ -14,8 +14,5 @@ namespace MarketSimulator.Repository.IRepo
 		int SaveChanges();
 		Database Database { get; }
 		DbEntityEntry Entry(object entity);
-
-		//DbSet<TEntity> Set<TEntity>() where TEntity : class;
-		//DbSet Set(Type entityType);
 	}
 }

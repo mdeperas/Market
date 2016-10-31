@@ -3,7 +3,12 @@ app.controller('signupController', ['$scope', '$location', '$timeout', 'authServ
 
     $scope.savedSuccessfully = false;
     $scope.message = "";
-    $scope.stocks = {};
+    $scope.stocks = {
+        name: "",
+        code: "",
+        unit: "",
+        value: ""
+    };
     var userId = "";
 
     $scope.registration = {
@@ -35,8 +40,6 @@ app.controller('signupController', ['$scope', '$location', '$timeout', 'authServ
                     console.log(response);
                 });
             });
-
-
         }, function (response) {
             var errors = [];
             for (var key in response.data.modelState) {

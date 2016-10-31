@@ -3,9 +3,10 @@ app.factory('userWalletService', ['$http', function($http) {
     
     var serviceBase = 'http://localhost:51136/';
     var userWalletServiceFactory = {};
-    var userStocks = [];
+
  
     var _saveUserWallet = function(stocks, userId) {
+        var userStocks = [];
         for(var index = 0; index < stocks.length; ++index)
         {
             var userStock = {
@@ -22,7 +23,7 @@ app.factory('userWalletService', ['$http', function($http) {
 
     var _getUserWallet = function(userId) {
 
-            return $http.get(serviceBase + 'api/userWallet/' + userId).then(function (response) {
+            return $http.get(serviceBase + 'api/GetUserWallet/' + userId).then(function (response) {
             var data = response.data || response;
             return data;
         })};
