@@ -13,11 +13,9 @@ namespace MarketSimulator.Repository.Models
 		[Display(Name = "Amount")]
 		public string Amount { get; set; }
 
-		[JsonIgnore]
 		[ForeignKey("UserId")]
 		public virtual IdentityUser User { get; set; }
 
-		[JsonIgnore]
 		[ForeignKey("StockId")]
 		public virtual Stock Stock { get; set; }
 	}

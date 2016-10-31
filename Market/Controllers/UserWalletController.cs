@@ -19,11 +19,11 @@ namespace Market.Controllers
 		    this.unitOfWork = unitOfWork;
 	    }
 
-		[Authorize]
 		// GET: api/UserWallet
+		[Authorize(Roles = "user")]
 		public IQueryable<UserWallet> GetUserWallets()
 		{
-			var userId = HttpContext.Current.User.GetUserId();
+			var userId = User.GetUserId();
 
 			return this.unitOfWork.UserWalletRepository.Get().Where(x => x.UserId == userId).AsQueryable();
 		}

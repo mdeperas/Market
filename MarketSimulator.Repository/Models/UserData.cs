@@ -15,7 +15,6 @@ namespace MarketSimulator.Repository.Models
 		[Range(1, int.MaxValue)]
 		public int AmountOfMoney { get; set; }
 
-		[JsonIgnore]
 		[ForeignKey("UserId")]
 		public virtual IdentityUser User { get; set; }
 	}

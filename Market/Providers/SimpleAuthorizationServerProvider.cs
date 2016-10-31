@@ -23,8 +23,6 @@ namespace Market.Providers
 
 		public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
 		{
-			//context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new [] {"*"});
-
 			var header = context.OwinContext.Response.Headers.SingleOrDefault(h => h.Key == "Access-Control-Allow-Origin");
 			if (header.Equals(default(KeyValuePair<string, string[]>)))
 			{
@@ -43,7 +41,7 @@ namespace Market.Providers
 			identity.AddClaim(new Claim(ClaimTypes.Name, user.UserName));
 			identity.AddClaim(new Claim("UserId", user.Id));
 			identity.AddClaim(new Claim("sub", context.UserName));
-			identity.AddClaim(new Claim("role", "user"));
+			identity.AddClaim(new Claim(ClaimTypes.Role, "user"));
 
 			context.Validated(identity);
 		}

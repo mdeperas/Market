@@ -12,12 +12,12 @@ namespace Market
 		{
 			HttpConfiguration config = new HttpConfiguration();
 
+			SimpleInjectorWebApiInitializer.Initialize(config);
+			OAuthInitializer.ConfigurationOAuth(app, config);
+
 			WebApiConfig.Register(config);
 			app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
 			app.UseWebApi(config);
-
-			SimpleInjectorWebApiInitializer.Initialize(config);
-			OAuthInitializer.ConfigurationOAuth(app, config);
 		}
 	}
 }

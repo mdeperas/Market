@@ -13,7 +13,6 @@ namespace Market.Extensions
 
 		public static string GetUserId(this IPrincipal principal)
 		{
-			long id;
 			var userIdClaim = (principal as ClaimsPrincipal)?
 				 .Claims?
 				 .FirstOrDefault(c => c.Type == UserIdClaimType);

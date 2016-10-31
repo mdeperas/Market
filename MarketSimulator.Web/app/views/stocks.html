@@ -36,22 +36,22 @@
                     <th>Name</th>
                     <th>Code</th>
                     <th>Unit</th>
-                    <th>Price</th>
+                    <th>Amount</th>
                 </tr>
             </thead>
             <tbody>
-                <tr data-ng-repeat="stock in stocks">
+                <tr data-ng-repeat="stock in userStocks">
                     <td>
-                        {{ stock.Name }}
+                        {{ stock.stock.name }}
                     </td>
                     <td>
-                        {{ stock.Code }}
+                        {{ stock.stock.code }}
                     </td>
                     <td>
-                        {{ stock.Unit }}
+                        {{ stock.stock.unit }}
                     </td>
                      <td>
-                        {{ stock.Price }}
+                        {{ stock.amount }}
                     </td>
                 </tr>
             </tbody>

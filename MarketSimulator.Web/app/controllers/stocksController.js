@@ -2,6 +2,7 @@
 app.controller('stocksController', ['$scope', 'authService', 'userWalletService', function ($scope, authService, userWalletService) {
 
     $scope.liveStocks = {};
+    $scope.userStocks = {};
 
     var socket = new WebSocket('ws://webtask.future-processing.com:8068/ws/stocks');
 
@@ -24,10 +25,10 @@ app.controller('stocksController', ['$scope', 'authService', 'userWalletService'
         }
 
         var getUserStocks = function () {
-            var test = userWalletService.getUserWallet();
-            console.log(test);
-            //$scope.userStocks 
+            userWalletService.getUserWallet(function (data) {
+                $scope.userStocks = data;
+            });
         };
-
-        getUserStocks();
+    
+    getUserStocks();
 }]);
